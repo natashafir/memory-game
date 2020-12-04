@@ -5,15 +5,26 @@
 }
 
 body {
+    font-family: 'Press Start 2P', sans-serif;
     height: 100vh;
     display: flex;
     background: #cae8d5;
+    margin: 0 auto;
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.wrapper{
+    margin: auto;
 }
 
 .memory-game {
     width: 640px;
     height: 640px;
-    margin: auto;
     display: flex;
     flex-wrap: wrap;
 }
@@ -34,7 +45,7 @@ body {
 }
 
 .front-face{
-    background-color: yellow;
+    background-color: lightskyblue;
     transform: rotateY(180deg);
 }
 
@@ -42,7 +53,6 @@ body {
 .back-face, .front-face {
     width: 100%;
     height: 100%;
-    padding: 10px;
     position: absolute;
     border-radius: 5px;
     backface-visibility: hidden;
