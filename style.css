@@ -41,7 +41,7 @@ h2 {
 }
 
 .back-face{
-    background-color: aqua;
+    /*background-color: aqua;*/
     /*transform: rotateY(180deg);*/
 }
 

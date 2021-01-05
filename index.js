@@ -1,4 +1,4 @@
-const cards = [
+const items = [
     {
         id: 0,
         img_url: './img/colibri.gif'
@@ -33,14 +33,16 @@ const cards = [
     }
 ];
 
+let cards = [];
+
 const sectionMemory = document.getElementById('section__memory');
 
-// const changeImg = (event) => {
-//     let target = event.target;
-//     img.src = cards[target.id].img_url;
-//     console.log(img.src);
-// };
-// sectionMemory.addEventListener('click', changeImg);
+const changeImg = (event) => {
+    let target = event.target;
+    img.src = cards[target.id].img_url;
+    console.log(img.src);
+};
+sectionMemory.addEventListener('click', changeImg);
 
 
 function initialGame() {
@@ -53,13 +55,10 @@ function shuffle(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
+console.log(shuffle(items));
 
 document.addEventListener("DOMContentLoaded", () => {
-    // imgFront.src = cards[index].img_url;
-
-
-    function createCardsItems(element, index) {
-
+    items.forEach(function (element, index) {
         const cardWrapper = document.createElement('div');
         const imgBack = document.createElement('img');
         const imgFront = document.createElement('img');
@@ -67,25 +66,15 @@ document.addEventListener("DOMContentLoaded", () => {
         cardWrapper.appendChild(imgBack);
         cardWrapper.appendChild(imgFront);
         imgBack.src = "./img/img-0.jpeg";
-        imgFront.src = cards[index].img_url;
+        imgFront.src = items[index].img_url;
         imgBack.classList.add("back-face");
         imgFront.classList.add("front-face");
-        cardWrapper.id = cards[index].id;
+        cardWrapper.id = items[index].id;
         sectionMemory.appendChild(cardWrapper);
-    }
+    });
 
-    let card = cards.map(createCardsItems);
-
-    // cards.forEach(function (element, index) {
-    //     const cardWrapper = document.createElement('div');
-    //     const img = document.createElement('img');
-    //     cardWrapper.classList.add("memory-card"); //class for CSS
-    //     cardWrapper.appendChild(img);
-    //     img.src = "./img/img-0.jpeg";
-    //     // img.src = cards[index].img_url;
-    //     img.classList.add("back-face");
-    //     cardWrapper.id = cards[index].id;
-    //     sectionMemory.appendChild(cardWrapper);
-    // });
+    // let card = items.map(createCardsItems);
+    // console.log(cards);
+    // console.log(items);
 
 });
