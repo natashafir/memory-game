@@ -34,15 +34,16 @@ const items = [
 ];
 
 let cards = [];
+const memoryCard = document.getElementById("memory-card");
 
 const sectionMemory = document.getElementById('section__memory');
 
-const changeImg = (event) => {
-    let target = event.target;
-    img.src = cards[target.id].img_url;
-    console.log(img.src);
-};
-sectionMemory.addEventListener('click', changeImg);
+// const changeImg = (event) => {
+//     let target = event.target;
+//     img.src = cards[target.id].img_url;
+//     console.log(img.src);
+// };
+// sectionMemory.addEventListener('click', changeImg);
 
 
 function initialGame() {
@@ -57,24 +58,27 @@ function shuffle(array) {
 }
 console.log(shuffle(items));
 
-document.addEventListener("DOMContentLoaded", () => {
-    items.forEach(function (element, index) {
-        const cardWrapper = document.createElement('div');
-        const imgBack = document.createElement('img');
-        const imgFront = document.createElement('img');
-        cardWrapper.classList.add("memory-card"); //class for CSS
-        cardWrapper.appendChild(imgBack);
-        cardWrapper.appendChild(imgFront);
-        imgBack.src = "./img/img-0.jpeg";
-        imgFront.src = items[index].img_url;
-        imgBack.classList.add("back-face");
-        imgFront.classList.add("front-face");
-        cardWrapper.id = items[index].id;
-        sectionMemory.appendChild(cardWrapper);
-    });
+function createCardItem(item) {
+    const cardWrapper = document.createElement('div');
+    const imgBack = document.createElement('img');
+    const imgFront = document.createElement('img');
+    cardWrapper.classList.add("memory-card"); //class for CSS
+    cardWrapper.appendChild(imgBack);
+    cardWrapper.appendChild(imgFront);
+    imgBack.src = "./img/img-0.jpeg";
+    imgFront.src = item.img_url;
+    imgBack.classList.add("back-face");
+    imgFront.classList.add("front-face");
+    cardWrapper.id = item.id;
+    sectionMemory.appendChild(cardWrapper);
+}
+items.forEach(createCardItem);
 
-    // let card = items.map(createCardsItems);
-    // console.log(cards);
-    // console.log(items);
-
-});
+// function loadGame() {
+//     for (let image of items) {
+//         cards.push(createCardItem(image));
+//         cards.push(createCardItem(image));
+//     }
+//     // updateGame();
+// }
+// loadGame();
