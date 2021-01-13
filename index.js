@@ -34,8 +34,6 @@ const items = [
 ];
 
 let cards = [];
-const memoryCard = document.getElementById("memory-card");
-
 const sectionMemory = document.getElementById('section__memory');
 
 // const changeImg = (event) => {
@@ -46,17 +44,14 @@ const sectionMemory = document.getElementById('section__memory');
 // sectionMemory.addEventListener('click', changeImg);
 
 
-function initialGame() {
-}
-
 // I choose to use the Fisher–Yates shuffle algorithm.
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
+    return array;
 }
-console.log(shuffle(items));
 
 function createCardItem(item) {
     const cardWrapper = document.createElement('div');
@@ -71,14 +66,19 @@ function createCardItem(item) {
     imgFront.classList.add("front-face");
     cardWrapper.id = item.id;
     sectionMemory.appendChild(cardWrapper);
+    return cardWrapper;
 }
-items.forEach(createCardItem);
 
-// function loadGame() {
-//     for (let image of items) {
-//         cards.push(createCardItem(image));
-//         cards.push(createCardItem(image));
-//     }
-//     // updateGame();
-// }
-// loadGame();
+function createAllCards() {
+    let fragment = document.createDocumentFragment();
+    let allCards = shuffle([...items, ...items]);
+
+    allCards.forEach(elem => {
+        fragment.appendChild(createCardItem(elem));
+        console.log(elem);
+    });
+    sectionMemory.appendChild(fragment);
+
+}
+createAllCards();
+
