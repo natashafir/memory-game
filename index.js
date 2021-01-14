@@ -36,13 +36,6 @@ const items = [
 // let cards = [];
 const sectionMemory = document.getElementById('section__memory');
 
-// const flipCard = (event) => {
-//     let target = event.target;
-//     img.src = items[target.id].img_url;
-//     console.log(img.src);
-// };
-// sectionMemory.addEventListener('click', flipCard);
-
 // I choose to use the Fisher–Yates shuffle algorithm.
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -77,3 +70,10 @@ function createAllCards() {
 }
 createAllCards();
 
+function flipCard() {
+    this.classList.toggle('flip');
+    console.log(this);
+}
+
+const everyCards = document.querySelectorAll('.memory-card');
+everyCards.forEach(items => items.addEventListener('click', flipCard));

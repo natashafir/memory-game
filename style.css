@@ -60,10 +60,10 @@ h2 {
     transition: 1s;
 }
 
-.memory-card:hover .front-face{
+.memory-card.flip .front-face{
     transform: rotateY(360deg);
 }
 
-.memory-card:hover .back-face{
+.memory-card.flip .back-face{
     transform: rotateY(180deg);
 }
