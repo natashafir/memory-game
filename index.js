@@ -35,8 +35,9 @@ const items = [
 
 // let cards = [];
 const sectionMemory = document.getElementById('section__memory');
+let hasFlippedCard = false;
+let firstCard, secondCard;
 
-// I choose to use the Fisher–Yates shuffle algorithm.
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
@@ -71,9 +72,23 @@ function createAllCards() {
 createAllCards();
 
 function flipCard() {
-    this.classList.toggle('flip');
-    console.log(this);
+    this.classList.add('flip');
+    if (!hasFlippedCard) {
+        hasFlippedCard = true;
+        firstCard = this;
+        return;
+    }
+    secondCard = this;
+    hasFlippedCard = false;
 }
+
+function unflipCards() {
+    setTimeout(() => {
+        firstCard.classList.remove('flip');
+        secondCard.classList.remove('flip');
+    }, 1500);
+}
+unflipCards();
 
 const everyCards = document.querySelectorAll('.memory-card');
 everyCards.forEach(items => items.addEventListener('click', flipCard));
