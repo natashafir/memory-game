@@ -102,8 +102,7 @@ function checkForMatch() {
         secondCard.removeEventListener('click', flipCard);
         console.log("Yeah!")
     } else {
-        firstCard.removeEventListener('click', flipCard);
-        secondCard.removeEventListener('click', flipCard);
+        unflipCards();
         console.log('Not iqualmente');
     }
 }
@@ -112,9 +111,8 @@ function unflipCards() {
     setTimeout(() => {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
-    }, 1500);
+    }, 1000);
 }
-
 
 const everyCards = document.querySelectorAll('.memory-card');
 everyCards.forEach(items => items.addEventListener('click', flipCard));
