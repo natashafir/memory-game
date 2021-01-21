@@ -33,7 +33,7 @@ const items = [
     }
 ];
 
-// let cards = [];
+// let choosedCards = [];
 const sectionMemory = document.getElementById('section__memory');
 let hasFlippedCard = false;
 let firstCard, secondCard;
@@ -65,21 +65,47 @@ function createAllCards() {
     let allCards = shuffle([...items, ...items]);
     allCards.forEach(elem => {
         sectionMemory.appendChild(createCardItem(elem));
-        // console.log(elem);
     });
 
 }
 createAllCards();
 
 function flipCard() {
+    if (this === firstCard) return;
     this.classList.add('flip');
     if (!hasFlippedCard) {
         hasFlippedCard = true;
         firstCard = this;
-        return;
+        console.log(firstCard);
+    } else {
+        if (this === secondCard) return;
+        secondCard = this;
+        console.log(secondCard);
+        hasFlippedCard = false;
+        checkForMatch();
     }
-    secondCard = this;
-    hasFlippedCard = false;
+}
+
+// const flipCard = event => {
+//     const target = event.target.parentElement;
+//     console.log(target);
+//     target.classList.add('flip');
+//
+//     if(!hasFlippedCard) {
+//         hasFlippedCard = true;
+//         firstCard = target;
+// }
+
+function checkForMatch() {
+    if(firstCard.id === secondCard.id){
+        firstCard.removeEventListener('click', flipCard);
+        secondCard.removeEventListener('click', flipCard);
+        console.log("Yeah!")
+    } else {
+        firstCard.removeEventListener('click', flipCard);
+        secondCard.removeEventListener('click', flipCard);
+        console.log('Not iqualmente');
+    }
 }
 
 function unflipCards() {
@@ -88,7 +114,7 @@ function unflipCards() {
         secondCard.classList.remove('flip');
     }, 1500);
 }
-unflipCards();
+
 
 const everyCards = document.querySelectorAll('.memory-card');
 everyCards.forEach(items => items.addEventListener('click', flipCard));
