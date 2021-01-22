@@ -36,6 +36,7 @@ const items = [
 // let choosedCards = [];
 const sectionMemory = document.getElementById('section__memory');
 let hasFlippedCard = false;
+let boardLocked = false;
 let firstCard, secondCard;
 
 function shuffle(array) {
@@ -71,6 +72,7 @@ function createAllCards() {
 createAllCards();
 
 function flipCard() {
+    if (boardLocked) return;
     if (this === firstCard) return;
     this.classList.add('flip');
     if (!hasFlippedCard) {
@@ -78,32 +80,23 @@ function flipCard() {
         firstCard = this;
         console.log(firstCard);
     } else {
-        if (this === secondCard) return;
+        hasFlippedCard = false;
         secondCard = this;
         console.log(secondCard);
-        hasFlippedCard = false;
         checkForMatch();
     }
 }
-
-// const flipCard = event => {
-//     const target = event.target.parentElement;
-//     console.log(target);
-//     target.classList.add('flip');
-//
-//     if(!hasFlippedCard) {
-//         hasFlippedCard = true;
-//         firstCard = target;
-// }
 
 function checkForMatch() {
     if(firstCard.id === secondCard.id){
         firstCard.removeEventListener('click', flipCard);
         secondCard.removeEventListener('click', flipCard);
-        console.log("Yeah!")
+        console.log("Yeah!");
+        hideCards()
     } else {
+        boardLocked = true;
         unflipCards();
-        console.log('Not iqualmente');
+            console.log('Not iqualmente');
     }
 }
 
@@ -111,7 +104,13 @@ function unflipCards() {
     setTimeout(() => {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
+        boardLocked = false;
     }, 1000);
+}
+
+function hideCards() {
+    firstCard.classList.add('hide');
+    secondCard.classList.add('hide');
 }
 
 const everyCards = document.querySelectorAll('.memory-card');

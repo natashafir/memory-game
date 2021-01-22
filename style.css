@@ -67,3 +67,7 @@ h2 {
 .memory-card.flip .back-face{
     transform: rotateY(180deg);
 }
+
+.memory-card.hide {
+    visibility: hidden;
+}
