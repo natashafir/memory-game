@@ -78,29 +78,23 @@ function flipCard() {
     if (!hasFlippedCard) {
         hasFlippedCard = true;
         firstCard = this;
-        console.log(firstCard);
     } else {
         hasFlippedCard = false;
         secondCard = this;
-        console.log(secondCard);
         checkForMatch();
     }
 }
 
 function checkForMatch() {
-    if(firstCard.id === secondCard.id){
-        firstCard.removeEventListener('click', flipCard);
-        secondCard.removeEventListener('click', flipCard);
-        console.log("Yeah!");
+    if (firstCard.id === secondCard.id) {
         hideCards()
     } else {
-        boardLocked = true;
         unflipCards();
-            console.log('Not iqualmente');
     }
 }
 
 function unflipCards() {
+    boardLocked = true;
     setTimeout(() => {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
@@ -109,6 +103,8 @@ function unflipCards() {
 }
 
 function hideCards() {
+    firstCard.removeEventListener('click', flipCard);
+    secondCard.removeEventListener('click', flipCard);
     firstCard.classList.add('hide');
     secondCard.classList.add('hide');
 }
