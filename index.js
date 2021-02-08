@@ -54,7 +54,7 @@ function createCardItem(item) {
     cardWrapper.classList.add("memory-card"); //class for CSS
     cardWrapper.appendChild(imgBack);
     cardWrapper.appendChild(imgFront);
-    imgBack.src = "./img/img-0.jpeg";
+    imgBack.src = "./img/img-0.jpg";
     imgFront.src = item.img_url;
     imgBack.classList.add("back-face");
     imgFront.classList.add("front-face");
@@ -71,19 +71,34 @@ function createAllCards() {
 }
 createAllCards();
 
-function flipCard() {
+// function flipCard() {
+//     if (boardLocked) return;
+//     if (this === firstCard) return;
+//     this.classList.add('flip');
+//     if (!hasFlippedCard) {
+//         hasFlippedCard = true;
+//         firstCard = this;
+//     } else {
+//         hasFlippedCard = false;
+//         secondCard = this;
+//         checkForMatch();
+//     }
+// }
+
+const flipCard = event => {
     if (boardLocked) return;
-    if (this === firstCard) return;
-    this.classList.add('flip');
+    const target = event.target.parentElement;
+    if (target === firstCard) return;
+    target.classList.add('flip');
     if (!hasFlippedCard) {
         hasFlippedCard = true;
-        firstCard = this;
+        firstCard = target;
     } else {
         hasFlippedCard = false;
-        secondCard = this;
+        secondCard = target;
         checkForMatch();
     }
-}
+};
 
 function checkForMatch() {
     if (firstCard.id === secondCard.id) {
