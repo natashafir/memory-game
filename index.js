@@ -71,34 +71,19 @@ function createAllCards() {
 }
 createAllCards();
 
-// function flipCard() {
-//     if (boardLocked) return;
-//     if (this === firstCard) return;
-//     this.classList.add('flip');
-//     if (!hasFlippedCard) {
-//         hasFlippedCard = true;
-//         firstCard = this;
-//     } else {
-//         hasFlippedCard = false;
-//         secondCard = this;
-//         checkForMatch();
-//     }
-// }
-
-const flipCard = event => {
+function flipCard() {
     if (boardLocked) return;
-    const target = event.target.parentElement;
-    if (target === firstCard) return;
-    target.classList.add('flip');
+    if (this === firstCard) return;
+    this.classList.add('flip');
     if (!hasFlippedCard) {
         hasFlippedCard = true;
-        firstCard = target;
+        firstCard = this;
     } else {
         hasFlippedCard = false;
-        secondCard = target;
+        secondCard = this;
         checkForMatch();
     }
-};
+}
 
 function checkForMatch() {
     if (firstCard.id === secondCard.id) {
