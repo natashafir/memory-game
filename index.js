@@ -33,7 +33,7 @@ const items = [
     }
 ];
 
-// let choosedCards = [];
+let choosedCards = [];
 const sectionMemory = document.getElementById('section__memory');
 let hasFlippedCard = false;
 let boardLocked = false;
@@ -87,9 +87,19 @@ function flipCard() {
 
 function checkForMatch() {
     if (firstCard.id === secondCard.id) {
-        hideCards()
+        hideCards();
+        choosedCards.push(firstCard.id);
+        checkForWin();
+        console.log(choosedCards)
     } else {
         unflipCards();
+    }
+}
+
+function checkForWin() {
+    if (choosedCards.length === 8) {
+        setTimeout(() => {alert("You win!")}, 1500);
+
     }
 }
 
